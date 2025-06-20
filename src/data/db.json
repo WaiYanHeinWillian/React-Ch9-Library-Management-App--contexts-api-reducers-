@@ -1,7 +1,7 @@
 {
   "books": [
     {
-      "id": "1",
+      "id": 1,
       "title": "Eloquent javascript",
       "description": "React JS book",
       "categories": [
@@ -10,7 +10,7 @@
       ]
     },
     {
-      "id": "2",
+      "id": 2,
       "title": "Laravel from scratch",
       "description": "Best PHP framwork book",
       "categories": [
@@ -20,13 +20,29 @@
       ]
     },
     {
-      "id": "3",
+      "id": 3,
       "title": "React Basic",
       "description": "Best JS Library book",
       "categories": [
         "React",
         "Programming",
         "Javascript"
+      ]
+    },
+    {
+      "id": "7411",
+      "title": "one",
+      "description": "one",
+      "categories": [
+        "one"
+      ]
+    },
+    {
+      "id": "64b7",
+      "title": "two",
+      "description": "two",
+      "categories": [
+        "two"
       ]
     }
   ]
