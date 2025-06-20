@@ -1,4 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import useFetch from '../hooks/useFetch';
+import { useNavigate } from 'react-router-dom';
 
 export default function Create() {
 
@@ -7,14 +9,33 @@ export default function Create() {
   let [newCategory,setNewCategory]=useState('');
   let [categories,setCategories]=useState([]);
 
-  let addCategory=()=>{
+  let {setPostData , data:book}=useFetch("http://localhost:3000/books","POST");
+  let navigate=useNavigate();
+
+  let addCategory=(e)=>{
     setCategories(prev => [newCategory,...prev]);
     setNewCategory('');
   }
 
+  let addBook=(e)=>{
+    e.preventDefault();
+    let data={
+      title,
+      description,
+      categories
+    }
+    setPostData(data)
+  }
+
+  useEffect(()=>{
+    if(book){
+      navigate("/");
+    }
+  },[book])
+
 
   return (
-    <form className="w-full max-w-lg mx-auto mt-5">
+    <form className="w-full max-w-lg mx-auto mt-5" onSubmit={addBook}>
       
       <div className="flex flex-wrap -mx-3 mb-6">
         <div className="w-full px-3">
@@ -52,7 +73,7 @@ export default function Create() {
         </div>
         <div className="flex flex-wrap">
                     {categories.map(c=>(
-                      <span key={c} className="mx-1 my-1 text-white rounded-full px-2 py-1 text-sm bg-indigo-600">{c}</span>
+                      <span className="mx-1 my-1 text-white rounded-full px-2 py-1 text-sm bg-indigo-600" key={c}>{c}</span>
                     ))}
         </div>
       </div>
