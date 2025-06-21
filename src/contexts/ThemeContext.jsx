@@ -6,7 +6,7 @@ const ThemeContext=createContext();
 //themecontextprovider component
 const ThemeContextPorvider = ({children})=>{
     return (
-        <ThemeContext.Provider value={{ theme:'dark' }}>
+        <ThemeContext.Provider value={{ theme:'light' }}>
             {children}
         </ThemeContext.Provider>
     )
