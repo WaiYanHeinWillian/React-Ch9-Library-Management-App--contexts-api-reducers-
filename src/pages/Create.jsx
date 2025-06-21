@@ -13,6 +13,12 @@ export default function Create() {
   let navigate=useNavigate();
 
   let addCategory=(e)=>{
+
+    if(newCategory && categories.includes(newCategory)){
+      setNewCategory('');
+      return;
+    }
+
     setCategories(prev => [newCategory,...prev]);
     setNewCategory('');
   }
