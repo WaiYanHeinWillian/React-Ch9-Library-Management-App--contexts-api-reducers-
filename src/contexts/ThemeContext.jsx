@@ -21,9 +21,9 @@ const ThemeContextPorvider = ({children})=>{
         theme:'light'
     })  //state = theme:'light' , dispatch = ThemeReducer
 
-    let changeTheme=()=>{
+    let changeTheme=(theme)=>{
         //action -> type + payload ->{type,payload}
-        dispatch({type : 'CHANGE_THEME' , payload : 'dark'})
+        dispatch({type : 'CHANGE_THEME' , payload : theme})
     }
 
     return (
