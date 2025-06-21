@@ -11,11 +11,11 @@ export default function Navbar() {
     navigate('/?search='+search);
   }
 
-  let {theme}=useTheme();
+  let {theme , changeTheme}=useTheme();
  
 
   return (
-    <nav className={`border border-b-1 ${theme=='dark' ? 'bg-blue-100' : 'bg-yellow-100'}`}>
+    <nav onClick={changeTheme} className={`border border-b-1 ${theme=='dark' ? 'bg-blue-100' : 'bg-yellow-100'}`}>
             <ul className='flex justify-between items-center p-3 max-w-6xl mx-auto'>
                 <li className='flex item-center gap-3'>
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
