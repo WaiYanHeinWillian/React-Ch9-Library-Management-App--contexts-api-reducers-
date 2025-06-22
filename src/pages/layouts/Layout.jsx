@@ -3,13 +3,16 @@ import { Outlet, useLocation } from 'react-router-dom'
 import Navbar from '../../components/Navbar'
 import { CSSTransition, SwitchTransition } from 'react-transition-group';
 import "./style.css"
+import useTheme from '../../hooks/useTheme';
 
 export default function Layout() {
 
   const location=useLocation();
 
+  let {isDark}=useTheme();
+
   return (
-    <div>
+    <div className={isDark ? 'bg-gray-950' : 'bg-white'}>
         <Navbar/>
 
         {/* dynamic router changes content */}

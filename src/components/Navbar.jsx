@@ -14,17 +14,17 @@ export default function Navbar() {
     navigate('/?search='+search);
   }
 
-  let {theme , changeTheme}=useTheme();
+  let { isDark , changeTheme }=useTheme();
  
 
   return (
-    <nav className={`border border-b-1`}>
+    <nav className={`border border-b-1 ${isDark ? 'bg-gray-950 border-indigo-600' : 'bg-white'}`}>
             <ul className='flex justify-between items-center p-3 max-w-6xl mx-auto'>
                 <li className='flex item-center gap-3'>
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                     <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
                   </svg>
-                  <input value={search} onChange={e=>setSearch(e.target.value)} type='text' placeholder='search books ...' className='outline-none px-2 py-1 rounded-lg'></input>
+                  <input value={search} onChange={e=>setSearch(e.target.value)} type='text' placeholder='search books ...' className='outline-none px-2 py-1 rounded-lg'/>
 
                   <button onClick={handleSearch} className='text-white bg-indigo-600 px-3 py-1 rounded-2xl flex items-center gap-1'>
                       <span className='hidden md:block'>Search</span>
@@ -56,8 +56,8 @@ export default function Navbar() {
                       <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvPwuxBhcP25ZMoQ8MI6Ip-F6mDXlI8bDo2w&s' className='w-full rounded-full'></img>
                     </div>
                     <div className='cursor-pointer'>
-                      {theme == 'dark' && <img src={lightIcon} className='w-8' onClick={()=>changeTheme("light")}></img>}
-                      {theme == 'light' && <img src={darkIcon} className='w-8' onClick={()=>changeTheme("dark")}></img>}
+                      {isDark && <img src={lightIcon} className='w-8' onClick={()=>changeTheme("light")}></img>}
+                      {!isDark && <img src={darkIcon} className='w-8' onClick={()=>changeTheme("dark")}></img>}
                     </div>
                 </li>
             </ul>

@@ -2,6 +2,7 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import useFetch from '../hooks/useFetch';
 import bookImg from "../assets/logo.jpg"
+import useTheme from '../hooks/useTheme';
 
 export default function BookDetail() {
 
@@ -9,13 +10,15 @@ export default function BookDetail() {
 
     let {data : book , loading , error}=useFetch(`http://localhost:3000/books/${id}`)
 
+    let {isDark}=useTheme();
+
   return (
     <>
         {error && <p>{error}</p>}
         {loading && <p>Loading ...</p>}
 
         {book && (
-            <div className='grid grid-cols-2'>
+            <div className={`grid grid-cols-2 h-screen ${isDark ? 'text-white' : ''}`}>
                 <div>
                     <img src={bookImg} className='w-[80%]'></img>
                 </div>
