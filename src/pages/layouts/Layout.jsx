@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
 import Navbar from '../../components/Navbar'
 import { CSSTransition, SwitchTransition } from 'react-transition-group';
-import "./style.css"
+import "./styles.css"
 import useTheme from '../../hooks/useTheme';
 
 export default function Layout() {
