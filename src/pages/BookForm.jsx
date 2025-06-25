@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import useFetch from '../hooks/useFetch';
 import { useNavigate, useParams } from 'react-router-dom';
 import useTheme from '../hooks/useTheme';
-import { addDoc, collection, doc, getDoc, serverTimestamp } from 'firebase/firestore';
+import { addDoc, collection, doc, getDoc, serverTimestamp, updateDoc } from 'firebase/firestore';
 import { db } from '../firebase';
 
 export default function Create() {
@@ -52,7 +52,7 @@ export default function Create() {
     setNewCategory('');
   }
 
-  let addBook=(e)=>{
+  let submitForm=async(e)=>{
     e.preventDefault();
     let data={
       title,
@@ -61,8 +61,14 @@ export default function Create() {
       date : serverTimestamp()
     }
     // setPostData(data)
-    let ref=collection(db,'books');
-    addDoc(ref,data);
+
+    if(isEdit){
+      let ref=doc(db,'books',id);
+      await updateDoc(ref,data);
+    }else{
+      let ref=collection(db,'books');
+      await addDoc(ref,data);
+    }
     navigate('/');
   }
 
@@ -76,7 +82,7 @@ export default function Create() {
 
   return (
     <div className='h-screen'>
-      <form className="w-full max-w-lg mx-auto mt-5" onSubmit={addBook}>
+      <form className="w-full max-w-lg mx-auto mt-5" onSubmit={submitForm}>
       
       <div className="flex flex-wrap -mx-3 mb-6">
         <div className="w-full px-3">
@@ -124,7 +130,7 @@ export default function Create() {
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
               </svg>
                       
-              <span className='hidden md:block'>{isEdit ? "Edit" : "Create"} Book</span>
+              <span className='hidden md:block'>{isEdit ? "Update" : "Create"} Book</span>
       </button>
       
   </form>
