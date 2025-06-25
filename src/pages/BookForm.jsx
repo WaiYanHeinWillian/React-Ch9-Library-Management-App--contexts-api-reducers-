@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import useFetch from '../hooks/useFetch';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import useTheme from '../hooks/useTheme';
-import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
+import { addDoc, collection, doc, getDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../firebase';
 
 export default function Create() {
@@ -11,6 +11,32 @@ export default function Create() {
   let [description,setDescription]=useState('');
   let [newCategory,setNewCategory]=useState('');
   let [categories,setCategories]=useState([]);
+  let [isEdit,setIsEdit]=useState(false)
+
+  let {id}=useParams()
+
+  useEffect(()=>{
+
+    //edit form
+    if(id){
+      setIsEdit(true)
+      let ref=doc(db,'books',id);
+              getDoc(ref).then(doc=>{
+                  if(doc.exists()){
+                    let {title,description,categories}=doc.data();
+                    setTitle(title);
+                    setDescription(description);
+                    setCategories(categories);
+                  }
+              })
+    //create form
+    }else{
+      setIsEdit(false);
+      setTitle('');
+      setDescription('');
+      setCategories([]);
+    }
+  },[])
 
   // let {setPostData , data:book}=useFetch("http://localhost:3000/books","POST");
   let navigate=useNavigate();
@@ -98,7 +124,7 @@ export default function Create() {
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
               </svg>
                       
-              <span className='hidden md:block'>Create Book</span>
+              <span className='hidden md:block'>{isEdit ? "Edit" : "Create"} Book</span>
       </button>
       
   </form>

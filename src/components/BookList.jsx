@@ -6,6 +6,7 @@ import useTheme from '../hooks/useTheme';
 import { db } from '../firebase';
 import { collection, deleteDoc, doc, getDocs, orderBy, query } from 'firebase/firestore';
 import trash from '../assets/trash.svg'
+import pencil from '../assets/pencil.svg'
 
 export default function BookList() {
 
@@ -80,8 +81,11 @@ export default function BookList() {
                       <span key={c} className="mx-1 my-1 text-white rounded-full px-2 py-1 text-sm bg-blue-500">{c}</span>
                       ))}
                     </div>
-                    <div onClick={(e)=>{deleteBook(e,b.id)}}>
-                      <img src={trash}></img>
+                    <div className='flex space-x-5 items-center'>
+                      <Link to={`/edit/${b.id}`}>
+                        <img src={pencil}></img>
+                      </Link>
+                      <img src={trash} onClick={(e)=>{deleteBook(e,b.id)}}></img>
                     </div>
                   </div>
                     </div>

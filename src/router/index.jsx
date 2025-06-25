@@ -4,7 +4,7 @@ import {
 } from "react-router-dom";
 import Home from '../pages/Home'
 import Layout from "../pages/layouts/Layout";
-import Create from "../pages/Create";
+import BookForm from "../pages/BookForm";
 import Search from "../pages/Search";
 import BookDetail from "../pages/BookDetail";
 
@@ -23,7 +23,11 @@ const router = createBrowserRouter([
             },
             {
                 path: "/create",
-                element: <Create/>
+                element: <BookForm/>
+            },
+            {
+                path: "/edit/:id",
+                element: <BookForm/>
             },
             {
                 path: "/search",
