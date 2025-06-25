@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import useFetch from '../hooks/useFetch';
 import { useNavigate } from 'react-router-dom';
 import useTheme from '../hooks/useTheme';
+import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
+import { db } from '../firebase';
 
 export default function Create() {
 
@@ -10,7 +12,7 @@ export default function Create() {
   let [newCategory,setNewCategory]=useState('');
   let [categories,setCategories]=useState([]);
 
-  let {setPostData , data:book}=useFetch("http://localhost:3000/books","POST");
+  // let {setPostData , data:book}=useFetch("http://localhost:3000/books","POST");
   let navigate=useNavigate();
 
   let addCategory=(e)=>{
@@ -29,16 +31,20 @@ export default function Create() {
     let data={
       title,
       description,
-      categories
+      categories,
+      date : serverTimestamp()
     }
-    setPostData(data)
+    // setPostData(data)
+    let ref=collection(db,'books');
+    addDoc(ref,data);
+    navigate('/');
   }
 
-  useEffect(()=>{
-    if(book){
-      navigate("/");
-    }
-  },[book])
+  // useEffect(()=>{
+  //   if(book){
+  //     navigate("/");
+  //   }
+  // },[book])
 
   let {isDark}=useTheme()
 

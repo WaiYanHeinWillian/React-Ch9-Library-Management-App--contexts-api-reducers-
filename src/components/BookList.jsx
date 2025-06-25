@@ -4,7 +4,7 @@ import useFetch from "../hooks/useFetch"
 import { Link, useLocation } from 'react-router-dom'
 import useTheme from '../hooks/useTheme';
 import { db } from '../firebase';
-import { collection, doc, getDocs } from 'firebase/firestore';
+import { collection, doc, getDocs, orderBy, query } from 'firebase/firestore';
 
 export default function BookList() {
 
@@ -21,7 +21,8 @@ export default function BookList() {
     useEffect(function(){
       setLoading(true);
       let ref=collection(db,'books');
-      getDocs(ref).then(docs=>{
+      let q =query(ref,orderBy('date','desc'))
+      getDocs(q).then(docs=>{
         if(docs.empty){
           setError("No Documents Found!");
           setLoading(false)
