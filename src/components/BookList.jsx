@@ -4,7 +4,8 @@ import useFetch from "../hooks/useFetch"
 import { Link, useLocation } from 'react-router-dom'
 import useTheme from '../hooks/useTheme';
 import { db } from '../firebase';
-import { collection, doc, getDocs, orderBy, query } from 'firebase/firestore';
+import { collection, deleteDoc, doc, getDocs, orderBy, query } from 'firebase/firestore';
+import trash from '../assets/trash.svg'
 
 export default function BookList() {
 
@@ -17,6 +18,17 @@ export default function BookList() {
     let [error,setError]=useState('');
     let [books,setBooks]=useState([]);
     let [loading,setLoading]=useState(false);
+
+    let deleteBook=async(e,id)=>{
+      e.preventDefault();
+
+      //delete firestore doc
+      let ref=doc(db,'books',id)
+      await deleteDoc(ref)
+
+      //delete frontend data
+      setBooks(prev=>prev.filter(b=>b.id!==id))
+    }
 
     useEffect(function(){
       setLoading(true);
@@ -62,10 +74,15 @@ export default function BookList() {
                   <p>{b.description}</p>
 
                   {/* genres */}
-                  <div className="flex flex-wrap">
-                    {b.categories.map(c=>(
+                  <div className="flex flex-wrap justify-between items-center">
+                    <div>
+                      {b.categories.map(c=>(
                       <span key={c} className="mx-1 my-1 text-white rounded-full px-2 py-1 text-sm bg-blue-500">{c}</span>
-                    ))}
+                      ))}
+                    </div>
+                    <div onClick={(e)=>{deleteBook(e,b.id)}}>
+                      <img src={trash}></img>
+                    </div>
                   </div>
                     </div>
                 </div>
