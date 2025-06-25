@@ -4,7 +4,7 @@ import useFetch from "../hooks/useFetch"
 import { Link, useLocation } from 'react-router-dom'
 import useTheme from '../hooks/useTheme';
 import { db } from '../firebase';
-import { collection, deleteDoc, doc, getDocs, orderBy, query } from 'firebase/firestore';
+import { collection, deleteDoc, doc, getDocs, onSnapshot, orderBy, query } from 'firebase/firestore';
 import trash from '../assets/trash.svg'
 import pencil from '../assets/pencil.svg'
 
@@ -28,14 +28,14 @@ export default function BookList() {
       await deleteDoc(ref)
 
       //delete frontend data
-      setBooks(prev=>prev.filter(b=>b.id!==id))
+      // setBooks(prev=>prev.filter(b=>b.id!==id));
     }
 
     useEffect(function(){
       setLoading(true);
       let ref=collection(db,'books');
       let q =query(ref,orderBy('date','desc'))
-      getDocs(q).then(docs=>{
+      onSnapshot(q,docs=>{
         if(docs.empty){
           setError("No Documents Found!");
           setLoading(false)

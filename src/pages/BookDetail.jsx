@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import useFetch from '../hooks/useFetch';
 import bookImg from "../assets/logo.jpg"
 import useTheme from '../hooks/useTheme';
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, getDoc, onSnapshot } from 'firebase/firestore';
 import { db } from '../firebase';
 
 export default function BookDetail() {
@@ -21,7 +21,8 @@ export default function BookDetail() {
     useEffect(()=>{
         setLoading(true)
         let ref=doc(db,'books',id);
-        getDoc(ref).then(doc=>{
+        // getDoc(ref).then();
+        onSnapshot(ref,doc=>{
             if(doc.exists()){
                 let book={id:doc.id,...doc.data()}
                 setBook(book)
