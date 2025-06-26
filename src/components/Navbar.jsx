@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import useTheme from '../hooks/useTheme';
 import lightIcon from '../assets/light.svg';
 import darkIcon from '../assets/dark.svg';
+import useSignout from '../hooks/useSignout';
 
 
 export default function Navbar() {
@@ -15,6 +16,13 @@ export default function Navbar() {
   }
 
   let { isDark , changeTheme }=useTheme();
+
+  let {logOut}=useSignout();
+
+  let signOutUser=async()=>{
+    await logOut();
+    navigate("/login")
+  }
  
 
   return (
@@ -58,6 +66,9 @@ export default function Navbar() {
                     <div className='cursor-pointer'>
                       {isDark && <img src={lightIcon} className='w-8' onClick={()=>changeTheme("light")}></img>}
                       {!isDark && <img src={darkIcon} className='w-8' onClick={()=>changeTheme("dark")}></img>}
+                    </div>
+                    <div>
+                      <button onClick={signOutUser} className='bg-red-400 text-white rounded-lg px-2 py-2 text-sm'>Logout</button>
                     </div>
                 </li>
             </ul>
