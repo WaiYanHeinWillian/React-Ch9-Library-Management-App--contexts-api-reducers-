@@ -14,7 +14,10 @@ export default function Register() {
     e.preventDefault();
     let user=await signUP(email,password);
 
-    navigate("/")
+    if(user){
+            navigate('/')
+    }
+    
   }
 
   return (

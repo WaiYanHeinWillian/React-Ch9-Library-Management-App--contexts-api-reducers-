@@ -1,5 +1,6 @@
 import {
     createBrowserRouter,
+    RouterProvider,
     
 } from "react-router-dom";
 import Home from '../pages/Home'
@@ -10,7 +11,15 @@ import BookDetail from "../pages/BookDetail";
 import Register from "../pages/Register";
 import Login from "../pages/Login";
 
-const router = createBrowserRouter([
+
+// export default router;
+
+import React, { useContext } from 'react'
+import { AuthContext } from "../contexts/AuthContext";
+
+export default function index() {
+  
+    const router = createBrowserRouter([
     {
         path: "/",
         element: <Layout/>,
@@ -43,7 +52,13 @@ const router = createBrowserRouter([
                 path: "/login",
                 element: <Login/>
             },
-        ]
-    }
-]);
-export default router;
+            ]
+        }
+    ]);
+    
+    let {authReady}=useContext(AuthContext);
+
+    return (
+    authReady && <RouterProvider router={router} />
+    )
+}
