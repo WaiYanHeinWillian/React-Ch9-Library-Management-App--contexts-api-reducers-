@@ -1,5 +1,6 @@
 import {
     createBrowserRouter,
+    Navigate,
     RouterProvider,
     
 } from "react-router-dom";
@@ -18,6 +19,10 @@ import React, { useContext } from 'react'
 import { AuthContext } from "../contexts/AuthContext";
 
 export default function index() {
+
+    let {authReady , user}=useContext(AuthContext);
+
+    const isAuthenticated=Boolean(user);
   
     const router = createBrowserRouter([
     {
@@ -26,37 +31,35 @@ export default function index() {
         children: [
             {
                 path: "",
-                element: <Home/>
+                element: isAuthenticated ? <Home/> : <Navigate to="/login" />
             },
             {
                 path: "/books/:id",
-                element: <BookDetail/>
+                element: isAuthenticated ? <BookDetail/> : <Navigate to="/login" />
             },
             {
                 path: "/create",
-                element: <BookForm/>
+                element: isAuthenticated ? <BookForm/> : <Navigate to="/login" />
             },
             {
                 path: "/edit/:id",
-                element: <BookForm/>
+                element: isAuthenticated ? <BookForm/> : <Navigate to="/login" />
             },
             {
                 path: "/search",
-                element: <Search/>
+                element: isAuthenticated ? <Search/> : <Navigate to="/login" />
             },
             {
                 path: "/register",
-                element: <Register/>
+                element: !isAuthenticated ? <Register/> : <Navigate to="/" />
             },
             {
                 path: "/login",
-                element: <Login/>
+                element: !isAuthenticated ? <Login/> : <Navigate to="/" />
             },
-            ]
-        }
-    ]);
-    
-    let {authReady}=useContext(AuthContext);
+        ]
+    }
+]);
 
     return (
     authReady && <RouterProvider router={router} />
