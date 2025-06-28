@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import logo from "../assets/logo.jpg"
+// import logo from "../assets/logo.jpg"
 import useFetch from "../hooks/useFetch"
 import { Link, useLocation } from 'react-router-dom'
 import useTheme from '../hooks/useTheme';
@@ -49,7 +49,7 @@ export default function BookList() {
             {books.map((b)=>(
             <Link to={`/books/${b.id}`} key={b.id}>
                   <div className={`p-4 border border-1 min-h-[420px] ${isDark ? 'text-white bg-gray-900  border-indigo-600 ' : ''}`} >
-                  <img src={logo}></img>
+                  <img src={b.cover}></img>
                     <div className="text-center space-y-2 mt-3">
                   <h1>{b.title}</h1>
                   <p>{b.description}</p>
