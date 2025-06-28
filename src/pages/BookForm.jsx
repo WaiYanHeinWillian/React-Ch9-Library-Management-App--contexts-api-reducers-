@@ -13,6 +13,8 @@ export default function Create() {
   let [newCategory,setNewCategory]=useState('');
   let [categories,setCategories]=useState([]);
   let [isEdit,setIsEdit]=useState(false)
+  let [file,setFile]=useState(null);
+  let [preview,setPreview]=useState('');
 
   let {id}=useParams()
 
@@ -56,6 +58,25 @@ export default function Create() {
   }
 
   let {user} = useContext(AuthContext)
+
+  let handlePhotoChange = (e)=>{
+    setFile(e.target.files[0])
+  }
+
+  let handlePreviewImage = (file)=>{
+    let reader=new FileReader;
+    reader.readAsDataURL(file);
+
+    reader.onload=()=>{
+      setPreview(reader.result)
+    }
+  }
+
+  useEffect(()=>{
+    if(file){
+      handlePreviewImage(file);
+    }
+  },[file])
 
   let submitForm=async(e)=>{
     e.preventDefault();
@@ -127,6 +148,13 @@ export default function Create() {
                     ))}
         </div>
       </div>
+      <div className="w-full my-3">
+          <label className={`block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 ${isDark ? 'text-white' : ''}`} htmlFor="grid-password">
+            Book Title
+          </label>
+          <input type='file' onChange={handlePhotoChange}/>
+          {!!preview && <img src={preview} className='my-3' width={500} height={500}></img> }
+       </div>
 
       <button className='text-white bg-indigo-600 px-3 py-2 rounded-2xl flex justify-center items-center gap-1 w-full'>
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
