@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import bookImg from "../assets/logo.jpg"
 import useTheme from '../hooks/useTheme';
 import useFirestore from '../hooks/useFirestore';
+import NoteForm from '../components/NoteForm';
 
 export default function BookDetail() {
 
@@ -26,7 +27,7 @@ export default function BookDetail() {
             <>
                 <div className={`grid grid-cols-2 ${isDark ? 'text-white' : ''}`}>
                 <div>
-                    <img src={bookImg} className='w-[80%]'></img>
+                    <img src={book.cover} className='w-[80%]'></img>
                 </div>
                 <div className='space-y-4'>
                     <h1 className='text-3xl font-bold'>{book.title}</h1>
@@ -42,11 +43,7 @@ export default function BookDetail() {
             </div>
             <div>
                 <h3 className='font-bold text-xl text-indigo-600 my-3 text-center'>My Notes</h3>
-                <textarea className='p-3 shadow-md border-2 bg-gray-50 w-full' cols="30" rows="5"></textarea>
-                <button className='text-white bg-indigo-600 px-3 py-2 rounded-lg my-3 flex items-center gap-1'>
-                                            
-                      <span className='hidden md:block'>Add Note</span>
-                </button>
+                    <NoteForm/>
 
 
                 <div className='border-2 shadow-md p-3 my-3'>
