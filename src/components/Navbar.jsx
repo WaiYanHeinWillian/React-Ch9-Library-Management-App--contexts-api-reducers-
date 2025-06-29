@@ -64,7 +64,7 @@ export default function Navbar() {
 
                   {/* profile image */}
                     <div className='w-11'>
-                      <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvPwuxBhcP25ZMoQ8MI6Ip-F6mDXlI8bDo2w&s' className='w-full rounded-full'></img>
+                      <img src='https://w0.peakpx.com/wallpaper/461/37/HD-wallpaper-gaara-naruto-black-red-hair-anime-boy-angry-boy-anime-dark-scary-scarf-thumbnail.jpg' className='w-full rounded-full'></img>
                     </div>
                     <div className='cursor-pointer'>
                       {isDark && <img src={lightIcon} className='w-8' onClick={()=>changeTheme("light")}></img>}

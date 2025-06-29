@@ -23,7 +23,8 @@ export default function BookDetail() {
         {loading && <p>Loading ...</p>}
 
         {book && (
-            <div className={`grid grid-cols-2 h-screen ${isDark ? 'text-white' : ''}`}>
+            <>
+                <div className={`grid grid-cols-2 ${isDark ? 'text-white' : ''}`}>
                 <div>
                     <img src={bookImg} className='w-[80%]'></img>
                 </div>
@@ -39,6 +40,29 @@ export default function BookDetail() {
                     </p>
                 </div>
             </div>
+            <div>
+                <h3 className='font-bold text-xl text-indigo-600 my-3 text-center'>My Notes</h3>
+                <textarea className='p-3 shadow-md border-2 bg-gray-50 w-full' cols="30" rows="5"></textarea>
+                <button className='text-white bg-indigo-600 px-3 py-2 rounded-lg my-3 flex items-center gap-1'>
+                                            
+                      <span className='hidden md:block'>Add Note</span>
+                </button>
+
+
+                <div className='border-2 shadow-md p-3 my-3'>
+                    <div className='flex space-x-3'>
+                        <img src='https://w0.peakpx.com/wallpaper/461/37/HD-wallpaper-gaara-naruto-black-red-hair-anime-boy-angry-boy-anime-dark-scary-scarf-thumbnail.jpg' className='w-12 h-12 rounded-full'/>
+                        <div>
+                            <h3>Wai Yan Hein</h3>
+                            <div className='text-gray-500'>20.6.2003</div>
+                        </div>
+                    </div>
+                    <div className='mt-3'>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla rerum unde eos quasi? Dolores suscipit corporis error saepe minima optio beatae tenetur iure tempora libero, hic nesciunt nihil commodi neque.
+                    </div>
+                </div>
+            </div>
+            </>
         )}
     </>
   )
