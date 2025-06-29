@@ -4,6 +4,7 @@ import bookImg from "../assets/logo.jpg"
 import useTheme from '../hooks/useTheme';
 import useFirestore from '../hooks/useFirestore';
 import NoteForm from '../components/NoteForm';
+import NoteList from '../components/NoteList';
 
 export default function BookDetail() {
 
@@ -44,20 +45,8 @@ export default function BookDetail() {
             <div>
                 <h3 className='font-bold text-xl text-indigo-600 my-3 text-center'>My Notes</h3>
                     <NoteForm/>
-
-
-                <div className='border-2 shadow-md p-3 my-3'>
-                    <div className='flex space-x-3'>
-                        <img src='https://w0.peakpx.com/wallpaper/461/37/HD-wallpaper-gaara-naruto-black-red-hair-anime-boy-angry-boy-anime-dark-scary-scarf-thumbnail.jpg' className='w-12 h-12 rounded-full'/>
-                        <div>
-                            <h3>Wai Yan Hein</h3>
-                            <div className='text-gray-500'>20.6.2003</div>
-                        </div>
-                    </div>
-                    <div className='mt-3'>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla rerum unde eos quasi? Dolores suscipit corporis error saepe minima optio beatae tenetur iure tempora libero, hic nesciunt nihil commodi neque.
-                    </div>
-                </div>
+                    <NoteList/>
+                
             </div>
             </>
         )}
