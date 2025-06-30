@@ -14,22 +14,29 @@ export default function NoteForm({type="create",setEditnote,editNote}) {
       }
     },[type])
 
-    let {addCollection} = useFirestore();
+    let {addCollection,updateDocument} = useFirestore();
 
-    let addNote=async(e)=>{
+    let submit=async(e)=>{
         e.preventDefault();
         
-        let data={
+        if(type=="create"){
+          let data={
             body,
             bookUid:id
+          }
+          await addCollection("notes",data)
+        }else{
+          editNote.body=body;
+          await updateDocument("notes",editNote.id,editNote,false);
+          setEditnote(null);
         }
-       await addCollection("notes",data)
+        
        setBody("");
         
     }
 
   return (
-                <form onSubmit={addNote}>
+                <form onSubmit={submit}>
                     <textarea value={body} onChange={e=>setBody(e.target.value)} className='p-3 shadow-md border-2 bg-gray-50 w-full' cols="30" rows="5"></textarea>
                     
                     <div className='flex space-x-3'>
