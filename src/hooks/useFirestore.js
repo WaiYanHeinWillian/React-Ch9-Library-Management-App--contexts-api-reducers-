@@ -24,7 +24,8 @@ export default function useFirestore() {
         onSnapshot(q,docs=>{
             if(docs.empty){
             setError("No Documents Found!");
-            setLoading(false)
+            setLoading(false);
+            setData([]);
             }else{
             let collectionDatas=[];
             docs.forEach(doc=>{
