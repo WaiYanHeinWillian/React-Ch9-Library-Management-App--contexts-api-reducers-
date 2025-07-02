@@ -4,7 +4,7 @@ import { db } from '../firebase';
 
 export default function useFirestore() {
 
-  let getCollection = (colName,_q)=>{
+  let getCollection = (colName,_q,search)=>{
 
         let qRef=useRef(_q).current
         
@@ -32,12 +32,22 @@ export default function useFirestore() {
                 let document={id : doc.id , ...doc.data()};
                 collectionDatas.push(document);
             })
+
+            if(search.field){
+                let searchData=collectionDatas.filter(doc=>{
+                    return doc[search.field].includes(search.value)
+                });
+                setData(searchData);
+            }else{
+                setData(collectionDatas);
+            }
+
             setData(collectionDatas)
             setLoading(false)
             setError('');
             }
         })
-        },[qRef])
+        },[qRef,search.field,search.value])
 
         return {error,data,loading}
   }

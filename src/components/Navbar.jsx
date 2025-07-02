@@ -9,7 +9,10 @@ import { AuthContext } from '../contexts/AuthContext';
 
 export default function Navbar() {
 
-  let [search,setSearch]=useState('');
+  let params=new URLSearchParams(location.search);  
+  let searchValue=params.get('search');
+
+  let [search,setSearch]=useState(searchValue);
   let navigate=useNavigate();
 
   let {user} = useContext(AuthContext);
